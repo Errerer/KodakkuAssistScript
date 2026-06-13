@@ -11,7 +11,7 @@ namespace ErrerScriptNamespace
         name: "[妖星乱舞绝境战]P5地火绘制",
         territorys: [1363],
         guid: "b3f7c1a2-8d4e-4f6a-9c12-5e8a1b3d7f90",
-        version: "0.0.8",
+        version: "0.0.9",
         author: "Errer",
         note: "P5全套：地火步进圈 + 钢铁月环 + 核爆分散。\n" +
               "安全点暂注释，地火圈+钢铁月环+核爆分散正常。")]
@@ -162,8 +162,8 @@ namespace ErrerScriptNamespace
         private const string DrawPrefix = "Errer_YW_P5Fire";
         private static readonly Vector3 ArenaCenter = new(100f, 0f, 100f);
 
-        private DrawModeEnum DM => DrawMode == DrawModeSetting.Imgui ? DMG : DM;
-        private DrawModeEnum DMG => DMG; // 引导线始终用Imgui
+        private DrawModeEnum DM => DrawMode == DrawModeSetting.Imgui ? DrawModeEnum.Imgui : DrawModeEnum.Default;
+        private const DrawModeEnum DMG = DrawModeEnum.Imgui;
 
         private int _fireCount;
 
