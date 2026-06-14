@@ -12,10 +12,10 @@ using Newtonsoft.Json;
 namespace ErrerScriptNamespace
 {
     [ScriptType(
-        name: "[妖星乱舞绝境战]P5地火绘制",
+        name: "[妖星乱舞绝境战]P5全流程绘制",
         territorys: [1363],
         guid: "b3f7c1a2-8d4e-4f6a-9c12-5e8a1b3d7f90",
-        version: "0.0.11",
+        version: "0.0.13",
         author: "Errer",
         note: "P5全套：地火步进圈 + 钢铁月环 + 地水/洪水2穿1安全点 + 核爆/神圣分散。\n" +
               "更新三星踩塔指路、地火后分散绘制。")]
@@ -151,6 +151,9 @@ namespace ErrerScriptNamespace
 
         [UserSetting("踩塔只指路自己")]
         public bool TowerGuideSelfOnly { get; set; } = true;
+
+        [UserSetting("踩塔头部标记")]
+        public bool TowerEnableMark { get; set; } = false;
 
         [UserSetting("踩塔Debug")]
         public bool TowerDebug { get; set; } = false;
@@ -556,7 +559,7 @@ namespace ErrerScriptNamespace
 
             int markIndex;
             lock (_towerLock) markIndex = _towerMarkOrder.GetValueOrDefault(partyIndex, 0);
-            accessory.Method.Mark(owner, TowerMarks[Math.Clamp(markIndex, 0, TowerMarks.Length - 1)]);
+            if (TowerEnableMark) accessory.Method.Mark(owner, TowerMarks[Math.Clamp(markIndex, 0, TowerMarks.Length - 1)]);
 
             var dp = accessory.Data.GetDefaultDrawProperties();
             dp.Name = $"{TowerPrefix}_g{partyIndex}";
